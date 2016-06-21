@@ -41,6 +41,7 @@
         <property name="org.kie.demo" value="${org.kie.demo:true}"/>
         <property name="org.kie.example" value="${org.kie.example:true}"/>
         <property name="designerdataobjects" value="${designerdataobjects:false}"/>
+	<property name="org.uberfire.nio.git.dir" value="/opt/jboss/repository"/>
         <!-- Make GIT repositories available from outside localhost. -->
         <property name="org.uberfire.nio.git.ssh.host" value="0.0.0.0"/>
     </system-properties>
