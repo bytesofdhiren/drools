@@ -16,6 +16,11 @@ ENV KIE_CLASSIFIER ee7
 ENV KIE_CONTEXT_PATH kie-server
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 
+##### ADD MYSQL DRIVER ###
+RUN mkdir $JBOSS_HOME/modules/system/layers/base/com/mysql
+RUN mkdir $JBOSS_HOME/modules/system/layers/base/com/mysql/main
+ADD etc/module.xml $JBOSS_HOME/modules/system/layers/base/com/mysql/main
+ADD etc/mysql-connector-java-5.1.39-bin.jar $JBOSS_HOME/modules/system/layers/base/com/mysql/main
 ####### KIE-SERVER ############
 RUN curl -o $HOME/$KIE_CONTEXT_PATH.war $KIE_REPOSITORY/org/kie/server/kie-server/$KIE_VERSION/kie-server-$KIE_VERSION-$KIE_CLASSIFIER.war && \
 unzip -q $HOME/$KIE_CONTEXT_PATH.war -d $JBOSS_HOME/standalone/deployments/$KIE_CONTEXT_PATH.war &&  \

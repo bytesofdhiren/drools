@@ -31,5 +31,5 @@ fi
 
 # Start Wildfly with the given arguments.
 echo "Running KIE Execution Server on JBoss Wildfly..."
-exec ./standalone.sh $JBOSS_ARGUMENTS -c standalone-full-kie-server.xml
+exec ./standalone.sh $JBOSS_ARGUMENTS -c standalone-full-kie-server.xml -Dorg.kie.server.persistence.ds=java:jboss/datasources/ExampleDS -Dorg.kie.server.persistence.dialect=org.hibernate.dialect.MySQL5Dialect -Dorg.kie.server.id=wildfly-kieserver
 exit $?

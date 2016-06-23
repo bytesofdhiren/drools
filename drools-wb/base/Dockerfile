@@ -19,8 +19,14 @@ ENV KIE_SERVER_PROFILE standalone-full
 ENV KIE_DEMO false
 ENV JAVA_OPTS -XX:MaxPermSize=256m -Xms256m -Xmx512m
 
+######INSTALLING MYSQL MODULE####
+RUN mkdir $JBOSS_HOME/modules/system/layers/base/com/mysql
+RUN mkdir $JBOSS_HOME/modules/system/layers/base/com/mysql/main
+ADD etc/module.xml $JBOSS_HOME/modules/system/layers/base/com/mysql/main
+ADD etc/mysql-connector-java-5.1.39-bin.jar $JBOSS_HOME/modules/system/layers/base/com/mysql/main
+
 ####### DROOLS-WB ############
-RUN curl -o $HOME/$KIE_CONTEXT_PATH.war $KIE_REPOSITORY/org/kie/kie-drools-wb-distribution-wars/$KIE_VERSION/kie-drools-wb-distribution-wars-$KIE_VERSION-$KIE_CLASSIFIER.war && \
+RUN curl -o $HOME/$KIE_CONTEXT_PATH.war http://ec2-52-64-146-119.ap-southeast-2.compute.amazonaws.com:8180/drools-wb.war && \
 unzip -q $HOME/$KIE_CONTEXT_PATH.war -d $JBOSS_HOME/standalone/deployments/$KIE_CONTEXT_PATH.war &&  \
 touch $JBOSS_HOME/standalone/deployments/$KIE_CONTEXT_PATH.war.dodeploy &&  \
 rm -rf $HOME/$KIE_CONTEXT_PATH.war
